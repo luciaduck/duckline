@@ -1,13 +1,13 @@
+Under revision
+
 # duckline
 
-A small, self-contained Go server for two things a static site often
-needs but shouldn't have to build from scratch: **scored, multiple-choice
+A small, self-contained Go backend for two things my Edtech project needed: **scored, multiple-choice
 exercises** delivered over a tiny JSON API, and **password-protected
 pages** rendered from Markdown. It ships as a single binary, stores its
-data in embedded SQLite (pure Go, no cgo), and is configured entirely
-through environment variables.
+data in embedded SQLite, and is configured entirely
+through environment variables on Alwaysdata.
 
-Licensed under **AGPL-3.0-or-later** (see `LICENSE`).
 
 ## Why
 
