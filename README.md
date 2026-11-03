@@ -1,4 +1,11 @@
-Under revision
+**NOTE**: This was my first **Go** project. Although I licensed it under **AGPL**, I don't really recommend using duckline: it works well for my website, 
+and it taught me a lot about backend architecture, hosting, and privacy concerns, but the problems it solves can be handled more easily.
+
+I am leaving it here as a testament to my learning process and as an example of backend architecting and AI-assisted coding.
+
+Somewhere in France, on an Alwaysdata server, duckline is still running, so you can try it live [here](https://ilquadernodellaprof.it/act/semantica-agente-1) (the page is in Italian).
+
+For anyone wondering, the coolest thing I architected for duckline is the **Semaforo** (threshold ranges). Take a look at the bottom of this file.
 
 # duckline
 
@@ -7,26 +14,6 @@ exercises** delivered over a tiny JSON API, and **password-protected
 pages** rendered from Markdown. It ships as a single binary, stores its
 data in embedded SQLite, and is configured entirely
 through environment variables on Alwaysdata.
-
-
-## Why
-
-At its core, duckline does one generic thing: present a multiple-choice
-prompt, grade the answer, optionally explain it, and record the
-outcome — through three stateless JSON calls. That pattern covers
-scored exercises, but it isn't limited to them: a trivia game, a
-branching quiz, a "which of these fits you" questionnaire — anything
-built around asking a multiple-choice question and reacting to the
-answer can run on the same endpoint.
-
-Alongside that, duckline gates arbitrary content behind a single shared
-password — no accounts, no sessions, just a password re-checked on
-every request.
-
-You write both as plain files (YAML/JSON for the questions, Markdown
-for the gated pages), run `-task=pull`, and the binary serves them over
-a small JSON API. No admin UI, no database to edit by hand, no plugin
-system — bring your own frontend.
 
 ## Privacy
 
@@ -71,7 +58,7 @@ can't be used to back out exact error counts.
 ## Quick start
 
 ```sh
-git clone https://github.com/ilquadernodellaprof/duckline.git
+git clone https://github.com/luciaduck/duckline.git
 cd duckline
 go mod tidy
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -o bin/duckline .
@@ -200,8 +187,8 @@ body.
       "id": "q1",
       "titolo": "In what year did the Western Roman Empire fall?",
       "opzioni": [
-        { "id": "a", "testo": "376 AD" },
-        { "id": "b", "testo": "476 AD" }
+        { "id": "a", "text": "376 AD" },
+        { "id": "b", "text": "476 AD" }
       ]
     }
   ]
@@ -348,11 +335,6 @@ than producing silently wrong colors.
 The draw happens once per run, so every page shares the same thresholds
 for that week. Drawing independently per page is a straightforward
 variant if you want the randomization to resist inference even harder.
-
-## Contributing
-
-Bug reports and pull requests are welcome — open an issue if something's
-broken or unclear, or send a PR directly if you've already got a fix.
 
 ## License
 
